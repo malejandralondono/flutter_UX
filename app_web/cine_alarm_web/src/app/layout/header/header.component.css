@@ -1,0 +1,27 @@
+.header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 0 16px;
+  background: var(--color-primario);
+  color: #fff;
+}
+
+.menu {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: inherit;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 600;
+}

@@ -1,0 +1,10 @@
+<app-header (toggleMenu)="alternarMenu()" />
+
+<div class="layout">
+  @if (menuAbierto()) {
+    <app-sidebar />
+  }
+  <main class="contenido">
+    <router-outlet />
+  </main>
+</div>

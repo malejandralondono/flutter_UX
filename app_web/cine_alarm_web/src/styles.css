@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+  --color-primario: #65419a;
+  --color-boton: #8a67b8;
+  --color-boton-hover: #7654a6;
+  --color-fondo-lateral: #f5f3f8;
+  --color-activo: #ddd3ec;
+  --color-borde: #e4e4e7;
+  --color-texto: #1f1f1f;
+  --color-texto-suave: #555;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--color-texto);
+  background: #fff;
+}
