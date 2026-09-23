@@ -1,0 +1,11 @@
+<section>
+  <div class="encabezado">
+    <div>
+      <h1>PELÍCULAS</h1>
+      <p class="subtitulo">{{ total() }} en cartelera próxima · actualizado hoy</p>
+    </div>
+    <button appBoton type="button" (click)="nuevaPelicula()">+ Nueva película</button>
+  </div>
+
+  <app-tabla-peliculas [peliculas]="peliculas()" (editar)="editarPelicula($event)" />
+</section>

@@ -1,0 +1,31 @@
+.sidebar {
+  width: 152px;
+  padding-top: 90px;
+  background: var(--color-fondo-lateral);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-texto);
+  text-decoration: none;
+}
+
+.item:hover { background: #ece7f3; }
+.item.activo { background: var(--color-activo); }
+
+.punto {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid #aaa;
+}
+
+.activo .punto { border-color: #3b8fd6; }

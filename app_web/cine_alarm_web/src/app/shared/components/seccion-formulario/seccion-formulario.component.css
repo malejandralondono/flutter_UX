@@ -1,0 +1,13 @@
+.seccion {
+  padding: 18px 16px 28px;
+  border-radius: 10px;
+  background: var(--color-fondo-seccion);
+}
+
+.titulo {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #444;
+}

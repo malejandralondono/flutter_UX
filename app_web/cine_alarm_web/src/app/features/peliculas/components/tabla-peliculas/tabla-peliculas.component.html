@@ -1,0 +1,37 @@
+<table class="tabla">
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Estreno</th>
+      <th>Cines</th>
+      <th>Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (pelicula of peliculas(); track pelicula.id) {
+      <tr>
+        <td>
+          <div class="titulo">
+            @if (pelicula.posterUrl) {
+              <img [src]="pelicula.posterUrl" alt="" class="poster" />
+            } @else {
+              <div class="poster"></div>
+            }
+            {{ pelicula.titulo }}
+          </div>
+        </td>
+        <td class="fecha">{{ pelicula.fechaEstreno | date: 'd MMMM y' }}</td>
+        <td class="cines">{{ pelicula.cantidadCines }} cines</td>
+        <td>
+          <button appBoton tamano="pequeno" type="button" (click)="editar.emit(pelicula)">
+            ✎ Editar
+          </button>
+        </td>
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="4" class="vacio">No hay películas registradas.</td>
+      </tr>
+    }
+  </tbody>
+</table>
