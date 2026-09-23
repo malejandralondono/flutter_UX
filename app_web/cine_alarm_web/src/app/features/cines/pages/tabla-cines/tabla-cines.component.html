@@ -1,0 +1,39 @@
+<table class="tabla">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Locación</th>
+      <th>Formatos</th>
+      <th>Películas</th>
+      <th>Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (cine of cines(); track cine.id) {
+      <tr>
+        <td class="nombre">{{ cine.nombre }}</td>
+        <td class="locacion">{{ cine.locacion }}</td>
+        <td>
+          <div class="formatos">
+            @for (formato of cine.formatos.split(','); track formato) {
+              <span class="formato">{{ formato.trim() }}</span>
+            }
+          </div>
+        </td>
+        <td class="peliculas">
+          {{ cine.peliculas.length }}
+          {{ cine.peliculas.length === 1 ? 'película' : 'películas' }}
+        </td>
+        <td>
+          <button appBoton tamano="pequeno" type="button" (click)="editar.emit(cine)">
+            ✎ Editar
+          </button>
+        </td>
+      </tr>
+    } @empty {
+      <tr>
+        <td colspan="5" class="vacio">No hay cines registrados.</td>
+      </tr>
+    }
+  </tbody>
+</table>

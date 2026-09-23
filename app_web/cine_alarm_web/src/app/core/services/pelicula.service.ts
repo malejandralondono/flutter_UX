@@ -14,6 +14,14 @@ export class PeliculaService {
 
   readonly peliculas = this._peliculas.asReadonly();
 
+      getPeliculaPorId(id: number): Pelicula | undefined {
+    return this._peliculas().find(p => p.id === id);
+  }
+
+  getPeliculasPorIds(ids: number[]): Pelicula[] {
+    return this._peliculas().filter(p => ids.includes(p.id));
+  }
+
     agregar(datos: Omit<Pelicula, 'id'>) {
     const nueva: Pelicula = { ...datos, id: Date.now() };
     this._peliculas.update(lista => [...lista, nueva]);

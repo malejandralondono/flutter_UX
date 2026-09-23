@@ -1,0 +1,77 @@
+<section>
+  <div class="encabezado">
+    <div>
+      <h1>Nuevo cine</h1>
+      <p class="subtitulo">Registra un cine o sala</p>
+    </div>
+    <button appBoton type="button" (click)="volver()">↩ Volver</button>
+  </div>
+
+  <form class="formulario" [formGroup]="form" (ngSubmit)="guardar()" novalidate>
+    <app-seccion-formulario titulo="Información general">
+      <div class="fila">
+        <div class="campo">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" type="text" formControlName="nombre" placeholder="Ej: Cine Colombia Andino" />
+          @if (nombre.invalid && nombre.touched) {
+            <span class="error">El nombre es obligatorio (máx. 100 caracteres).</span>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="locacion">Locación</label>
+          <input id="locacion" type="text" formControlName="locacion" placeholder="Ej: Bogotá - Centro Comercial Andino" />
+          @if (locacion.invalid && locacion.touched) {
+            <span class="error">La locación es obligatoria (máx. 150 caracteres).</span>
+          }
+        </div>
+      </div>
+    </app-seccion-formulario>
+
+    <app-seccion-formulario titulo="Formatos">
+      <div class="campo">
+        <span class="etiqueta">Formatos disponibles</span>
+        <div class="opciones">
+          @for (formato of formatosDisponibles; track formato) {
+            <label class="opcion" [class.activa]="formatoSeleccionado(formato)">
+              <input
+                type="checkbox"
+                [checked]="formatoSeleccionado(formato)"
+                (change)="alternarFormato(formato)"
+              />
+              {{ formato }}
+            </label>
+          }
+        </div>
+        @if (formatos.invalid && formatos.touched) {
+          <span class="error">Selecciona al menos un formato.</span>
+        }
+      </div>
+    </app-seccion-formulario>
+
+    <app-seccion-formulario titulo="Cartelera">
+      <div class="campo">
+        <span class="etiqueta">Películas que proyecta</span>
+        <div class="opciones">
+          @for (pelicula of peliculas(); track pelicula.id) {
+            <label class="opcion" [class.activa]="peliculaSeleccionada(pelicula.id)">
+              <input
+                type="checkbox"
+                [checked]="peliculaSeleccionada(pelicula.id)"
+                (change)="alternarPelicula(pelicula.id)"
+              />
+              {{ pelicula.titulo }}
+            </label>
+          } @empty {
+            <span class="vacio">No hay películas registradas todavía.</span>
+          }
+        </div>
+      </div>
+    </app-seccion-formulario>
+
+    <div class="acciones">
+      <button appBoton type="submit">Guardar cine</button>
+      <button appBoton variante="peligro" type="button" (click)="volver()">Cancelar</button>
+    </div>
+  </form>
+</section>

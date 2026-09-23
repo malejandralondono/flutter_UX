@@ -1,2 +1,9 @@
-<h1>CINES Y SALAS</h1>
-<p>Próximamente.</p>
+<header class="encabezado">
+  <div>
+    <h1>Cines y salas</h1>
+    <p class="subtitulo">{{ cines().length }} registrados · actualizado hoy</p>
+  </div>
+  <button appBoton type="button" (click)="nuevoCine()">+ Nuevo cine</button>
+</header>
+
+<app-tabla-cines [cines]="cines()" (editar)="editarCine($event)" />
