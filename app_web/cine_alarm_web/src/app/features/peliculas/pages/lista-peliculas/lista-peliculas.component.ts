@@ -1,4 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { PeliculaService } from '../../../../core/services/pelicula.service';
 import { Pelicula } from '../../../../core/models/pelicula.model';
 import { TablaPeliculasComponent } from '../../components/tabla-peliculas/tabla-peliculas.component';
@@ -13,17 +14,17 @@ import { BotonComponent } from '../../../../shared/components/boton/boton.compon
 })
 export class ListaPeliculasComponent {
   private peliculaService = inject(PeliculaService);
+  private router = inject(Router);
 
   peliculas = this.peliculaService.peliculas;
   total = computed(() => this.peliculas().length);
 
   nuevaPelicula() {
-    // TODO: navegar al formulario de registro
-    console.log('Nueva película');
+    this.router.navigate(['/peliculas', 'nueva']);
   }
 
   editarPelicula(pelicula: Pelicula) {
-    // TODO: navegar al formulario de edición
+    // TODO: navegar al formulario de edición (P3)
     console.log('Editar', pelicula);
   }
 }

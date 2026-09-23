@@ -1,0 +1,56 @@
+<section>
+  <div class="encabezado">
+    <div>
+      <h1>Nueva película</h1>
+      <p class="subtitulo">Registra un nuevo estreno</p>
+    </div>
+    <button appBoton type="button" (click)="volver()">↩ Volver</button>
+  </div>
+
+  <form class="formulario" [formGroup]="form" (ngSubmit)="guardar()" novalidate>
+    <app-seccion-formulario titulo="Información general">
+      <div class="fila">
+        <div class="campo">
+          <label for="titulo">Título</label>
+          <input id="titulo" type="text" formControlName="titulo" placeholder="Ej: Nova: Horizonte" />
+          @if (titulo.invalid && titulo.touched) {
+            <span class="error">El título es obligatorio (máx. 100 caracteres).</span>
+          }
+        </div>
+
+        <div class="campo">
+          <label for="fechaEstreno">Fecha de estreno</label>
+          <input id="fechaEstreno" type="date" formControlName="fechaEstreno" />
+          @if (fechaEstreno.invalid && fechaEstreno.touched) {
+            <span class="error">Selecciona la fecha de estreno.</span>
+          }
+        </div>
+      </div>
+    </app-seccion-formulario>
+
+    <app-seccion-formulario titulo="Contenido">
+      <div class="campo">
+        <label for="sinopsis">Sinopsis</label>
+        <textarea id="sinopsis" rows="3" formControlName="sinopsis" placeholder="Escribe la sinopsis"></textarea>
+      </div>
+    </app-seccion-formulario>
+
+    <app-seccion-formulario titulo="Recursos">
+      <div class="campo campo-medio">
+        <label for="trailerUrl">Tráiler</label>
+        <div class="con-icono">
+          <span class="icono" aria-hidden="true">🔗</span>
+          <input id="trailerUrl" type="url" formControlName="trailerUrl" placeholder="URL del tráiler" />
+        </div>
+        @if (trailerUrl.invalid && trailerUrl.touched) {
+          <span class="error">Ingresa una URL válida (debe empezar con http:// o https://).</span>
+        }
+      </div>
+    </app-seccion-formulario>
+
+    <div class="acciones">
+      <button appBoton type="submit">Guardar película</button>
+      <button appBoton variante="peligro" type="button" (click)="volver()">Cancelar</button>
+    </div>
+  </form>
+</section>

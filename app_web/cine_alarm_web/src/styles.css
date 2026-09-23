@@ -8,6 +8,10 @@
   --color-borde: #e4e4e7;
   --color-texto: #1f1f1f;
   --color-texto-suave: #555;
+  --color-peligro: #8b3a44;
+  --color-peligro-hover: #74303a;
+  --color-fondo-seccion: #f4f3f2;
+  --color-error: #b3261e;
 }
 
 * { box-sizing: border-box; }

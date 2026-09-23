@@ -3,5 +3,7 @@ export interface Pelicula {
   titulo: string;
   fechaEstreno: string; // formato 'YYYY-MM-DD'
   cantidadCines: number;
+  sinopsis?: string;
+  trailerUrl?: string;
   posterUrl?: string;
 }

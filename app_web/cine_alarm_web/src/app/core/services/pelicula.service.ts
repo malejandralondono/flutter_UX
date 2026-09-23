@@ -13,4 +13,10 @@ export class PeliculaService {
   ]);
 
   readonly peliculas = this._peliculas.asReadonly();
+
+    agregar(datos: Omit<Pelicula, 'id'>) {
+    const nueva: Pelicula = { ...datos, id: Date.now() };
+    this._peliculas.update(lista => [...lista, nueva]);
+  }
 }
+
