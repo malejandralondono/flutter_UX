@@ -1,0 +1,18 @@
+<section>
+  <div class="encabezado">
+    <div>
+      <h1>Editar película</h1>
+      <p class="subtitulo">Actualiza los datos del estreno</p>
+    </div>
+    <button appBoton type="button" (click)="volver()">↩ Volver</button>
+  </div>
+
+  @if (pelicula) {
+    <app-formulario-pelicula
+      [pelicula]="pelicula"
+      textoBoton="Guardar cambios"
+      (guardar)="guardar($event)"
+      (cancelar)="volver()"
+    />
+  }
+</section>

@@ -7,3 +7,5 @@ export interface Pelicula {
   trailerUrl?: string;
   posterUrl?: string;
 }
+
+export type PeliculaFormulario = Pick<Pelicula, 'titulo' | 'fechaEstreno' | 'sinopsis' | 'trailerUrl'>;

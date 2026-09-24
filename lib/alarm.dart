@@ -1,6 +1,5 @@
 //lib/alarm.dart
 import 'package:flutter/material.dart';
-import 'main.dart';
 import 'movie_model.dart';
 import 'movie_repository.dart';
 
@@ -103,10 +102,7 @@ class AlarmPage extends StatelessWidget {
   currentIndex: 1, 
   onTap: (index) {
     if (index == 0) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => const HomePage()),
-      );
+      Navigator.pop(context);
     }
   },
   items: const <BottomNavigationBarItem>[

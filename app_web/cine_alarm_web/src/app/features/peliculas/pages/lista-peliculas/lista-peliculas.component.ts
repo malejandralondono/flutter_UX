@@ -24,7 +24,6 @@ export class ListaPeliculasComponent {
   }
 
   editarPelicula(pelicula: Pelicula) {
-    // TODO: navegar al formulario de edición (P3)
-    console.log('Editar', pelicula);
+    this.router.navigate(['/peliculas', pelicula.id, 'editar']);
   }
 }
