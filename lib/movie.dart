@@ -75,7 +75,7 @@ class _MovieDetail extends StatelessWidget {
                 movie.poster,
                 height: 300,
                 fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) =>
+                errorBuilder: (_, _, _) =>
                     const Icon(Icons.broken_image, size: 80),
               ),
             ),
@@ -128,7 +128,7 @@ class _MovieDetail extends StatelessWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: movie.actors.length,
-              separatorBuilder: (_, __) => const SizedBox(width: 12),
+              separatorBuilder: (_, _) => const SizedBox(width: 12),
               itemBuilder: (context, i) {
                 final actor = movie.actors[i];
                 return SizedBox(
@@ -141,7 +141,7 @@ class _MovieDetail extends StatelessWidget {
                           width: 64,
                           height: 64,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => const CircleAvatar(
+                          errorBuilder: (_, _, _) => const CircleAvatar(
                             radius: 32,
                             child: Icon(Icons.person),
                           ),

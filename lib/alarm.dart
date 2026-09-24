@@ -133,7 +133,7 @@ Widget build(BuildContext context) {
           movie.poster,
           height: 150,
           fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) =>
+          errorBuilder: (_, _, _) =>
               const Icon(Icons.broken_image, size: 80),
         ),
         title: Text(movie.title),

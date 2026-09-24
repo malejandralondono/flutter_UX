@@ -35,7 +35,7 @@ class _SampleCard extends StatelessWidget {
           child: Image.asset(
             poster,
             fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) =>
+            errorBuilder: (_, _, _) =>
                 const Center(child: Icon(Icons.broken_image, size: 48)),
           ),
         ),
@@ -62,7 +62,7 @@ class _CardAlarma extends StatelessWidget {
                 movie.poster,
                 height: 150,
                 fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) =>
+                errorBuilder: (_, _, _) =>
                     const Icon(Icons.broken_image, size: 80),
               ),
           title: Text(movie.title),
@@ -98,7 +98,7 @@ class _CardProxima extends StatelessWidget {
                 movie.poster,
                 height: 150,
                 fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) =>
+                errorBuilder: (_, _, _) =>
                     const Icon(Icons.broken_image, size: 80),
               ),
           title: Text(movie.title),
