@@ -3,6 +3,16 @@
 - **App web (Angular):** `app_web/cine_alarm_web`
 - **App móvil (Flutter):** raíz del repositorio
 
+## Estructura
+
+flutter_UX/
+├── lib/              ← app móvil 
+├── assets/           ← pósters, actores y movies.json
+├── pubspec.yaml
+└── app_web/
+    └── cine_alarm_web/
+        ├── public/   ← pósters 
+        └── src/app/  ← app web 
 
 ## App web
 
