@@ -139,9 +139,9 @@ class _AlarmaCard extends StatelessWidget {
                         style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(height: 4),
-                      Text('Estreno en ${movie.releaseDays} días'),
+                      Text('Estreno: ${movie.fechaEstrenoLarga}'),
                       Text(
-                        alarma.descripcion,
+                        alarma.textoAviso(movie.releaseDays),
                         style: const TextStyle(fontSize: 12, color: Colors.black54),
                       ),
                       const SizedBox(height: 8),

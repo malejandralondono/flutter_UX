@@ -5,7 +5,7 @@
     "poster": "assets/avatar_fire_and_ash.jpg",
     "duration": 195,
     "genre": "Ciencia Ficción",
-    "releaseDays": 20,
+    "releaseDate": "2026-10-14",
     "synopsis": "La tercera entrega de la saga Avatar lleva a Jake Sully y su familia a enfrentar al feroz clan Na'vi del Fuego mientras luchan por proteger Pandora de nuevas amenazas.",
     "actors": [
       { "name": "Sam Worthington", "photo": "assets/actors/sam_worthington.jpg" },
@@ -19,7 +19,7 @@
     "poster": "assets/coyote_vs_acme.jpg",
     "duration": 90,
     "genre": "Comedia/Animación",
-    "releaseDays": 35,
+    "releaseDate": "2026-10-29",
     "synopsis": "El Coyote contrata a un abogado para demandar a ACME Corporation por los innumerables productos defectuosos que lo han hecho fracasar una y otra vez en su persecución del Correcaminos.",
     "actors": [
       { "name": "John Cena", "photo": "assets/actors/john_cena.jpg" },
@@ -32,7 +32,7 @@
     "poster": "assets/the_invite.jpg",
     "duration": 105,
     "genre": "Drama",
-    "releaseDays": 2,
+    "releaseDate": "2026-09-26",
     "synopsis": "Joe y Angela invitan a sus vecinos a cenar, y pronto la amistosa velada entre parejas se transforma en un intenso intercambio sin filtros. A medida que avanza la noche, deseos ocultos, inseguridades y tensiones acumuladas salen a la luz, poniendo a prueba los límites de su relación.",
     "actors": [
       { "name": "Olivia Wilde", "photo": "assets/actors/olivia_wilde.jpg" },
@@ -45,7 +45,7 @@
     "poster": "assets/the_odessy.jpg",
     "duration": 180,
     "genre": "Aventura/Drama",
-    "releaseDays": 5,
+    "releaseDate": "2026-09-29",
     "synopsis": "Tras la caída de Troya, el rey Odiseo emprende un peligroso viaje de regreso a casa, enfrentando monstruos, dioses caprichosos y las pruebas más difíciles de su vida.",
     "actors": [
       { "name": "Matt Damon", "photo": "assets/actors/matt_damon.jpg" },
@@ -59,7 +59,7 @@
     "poster": "assets/minions.jpg",
     "duration": 91,
     "genre": "Animación/Comedia",
-    "releaseDays": 60,
+    "releaseDate": "2026-11-23",
     "synopsis": "Los Minions viven nuevas aventuras mientras buscan a un nuevo jefe villano digno de servir, metiéndose en líos por todo el mundo con su característico caos amarillo.",
     "actors": [
       { "name": "Steve Carell", "photo": "assets/actors/steve_carell.jpg" },
@@ -72,7 +72,7 @@
     "poster": "assets/spiderverse.jpg",
     "duration": 117,
     "genre": "Animación/Acción",
-    "releaseDays": 14,
+    "releaseDate": "2026-10-08",
     "synopsis": "Miles Morales descubre sus poderes arácnidos y se une a versiones de Spider-Man de universos paralelos para detener una amenaza que pone en riesgo el multiverso.",
     "actors": [
       { "name": "Shameik Moore", "photo": "assets/actors/shameik_moore.jpg" },

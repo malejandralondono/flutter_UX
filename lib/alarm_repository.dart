@@ -8,7 +8,7 @@ class AlarmRepository extends ChangeNotifier {
   static final AlarmRepository instance = AlarmRepository._();
 
   final List<Alarma> _alarmas = [
-    const Alarma(movieId: 4, dias: 5),
+    const Alarma(movieId: 4, dias: 3),
     const Alarma(movieId: 5, dias: 15),
   ];
 

@@ -2,11 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:stacked_cards_carousel/stacked_cards_carousel.dart';
 
-import 'movie_repository.dart';
-import 'movie_model.dart';
-import 'movie.dart';
 import 'alarm.dart';
-
+import 'alarm_form.dart';
+import 'alarm_model.dart';
+import 'alarm_repository.dart';
+import 'movie.dart';
+import 'movie_model.dart';
+import 'movie_repository.dart';
 
 const Color kMorado = Color.fromARGB(255, 107, 63, 158);
 const Color kAzul = Color.fromARGB(255, 132, 217, 222);
@@ -19,6 +21,13 @@ void abrirPelicula(BuildContext context, int movieId) {
   Navigator.push(
     context,
     MaterialPageRoute(builder: (_) => MoviePage(movieId: movieId)),
+  );
+}
+
+void abrirFormularioAlarma(BuildContext context, int movieId) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (_) => AlarmFormPage(movieId: movieId)),
   );
 }
 
@@ -48,10 +57,11 @@ class _SampleCard extends StatelessWidget {
   }
 }
 
+/// Película que ya tiene alarma: el botón abre la edición (M7).
 class _CardAlarma extends StatelessWidget {
-  const _CardAlarma({required this.movie});
+  const _CardAlarma({required this.movie, required this.alarma});
   final Movie movie;
-
+  final Alarma alarma;
 
   @override
   Widget build(BuildContext context) {
@@ -59,25 +69,21 @@ class _CardAlarma extends StatelessWidget {
       child: Card(
         child: ListTile(
           leading: Image.asset(
-                movie.poster,
-                height: 150,
-                fit: BoxFit.cover,
-                errorBuilder: (_, _, _) =>
-                    const Icon(Icons.broken_image, size: 80),
-              ),
+            movie.poster,
+            height: 150,
+            fit: BoxFit.cover,
+            errorBuilder: (_, _, _) =>
+                const Icon(Icons.broken_image, size: 80),
+          ),
           title: Text(movie.title),
-          subtitle: Text("Aviso en ${movie.releaseDays} días"),
+          subtitle: Text(alarma.textoAviso(movie.releaseDays, prefijo: 'Aviso')),
           trailing: TextButton(
             style: TextButton.styleFrom(
               foregroundColor: Colors.white,
               backgroundColor: kMorado,
             ),
             child: const Text('ACTIVA'),
-            onPressed: () {
-Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => const AlarmPage()),
-      );            },
+            onPressed: () => abrirFormularioAlarma(context, movie.id),
           ),
         ),
       ),
@@ -85,6 +91,7 @@ Navigator.push(
   }
 }
 
+/// Película próxima sin alarma: el botón abre la configuración (M4).
 class _CardProxima extends StatelessWidget {
   const _CardProxima({required this.movie});
   final Movie movie;
@@ -95,12 +102,12 @@ class _CardProxima extends StatelessWidget {
       child: Card(
         child: ListTile(
           leading: Image.asset(
-                movie.poster,
-                height: 150,
-                fit: BoxFit.cover,
-                errorBuilder: (_, _, _) =>
-                    const Icon(Icons.broken_image, size: 80),
-              ),
+            movie.poster,
+            height: 150,
+            fit: BoxFit.cover,
+            errorBuilder: (_, _, _) =>
+                const Icon(Icons.broken_image, size: 80),
+          ),
           title: Text(movie.title),
           subtitle: Text("Estreno en ${movie.releaseDays} días"),
           trailing: TextButton(
@@ -109,14 +116,61 @@ class _CardProxima extends StatelessWidget {
               backgroundColor: kAzul,
             ),
             child: const Text('ACTIVAR'),
-            onPressed: () {
-Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => const AlarmPage()),
-      );            },
+            onPressed: () => abrirFormularioAlarma(context, movie.id),
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Muestra primero las películas con alarma y luego las 2 próximas sin alarma.
+/// Se actualiza solo cuando se crea, edita o elimina una alarma.
+class _RadarAlarmas extends StatelessWidget {
+  const _RadarAlarmas({required this.moviesFuture});
+  final Future<List<Movie>> moviesFuture;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Movie>>(
+      future: moviesFuture,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return const SizedBox.shrink();
+        final movies = snapshot.data!;
+
+        return ListenableBuilder(
+          listenable: AlarmRepository.instance,
+          builder: (context, _) {
+            final conAlarma = <(Movie, Alarma)>[];
+            final sinAlarma = <Movie>[];
+
+            for (final movie in movies) {
+              final alarma = AlarmRepository.instance.getByMovieId(movie.id);
+              if (alarma != null) {
+                conAlarma.add((movie, alarma));
+              } else {
+                sinAlarma.add(movie);
+              }
+            }
+            sinAlarma.sort((a, b) => a.releaseDays.compareTo(b.releaseDays));
+
+            return Column(
+              children: [
+                for (final (movie, alarma) in conAlarma)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: _CardAlarma(movie: movie, alarma: alarma),
+                  ),
+                for (final movie in sinAlarma.take(2))
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: _CardProxima(movie: movie),
+                  ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 }
@@ -223,75 +277,34 @@ class _HomePageState extends State<HomePage> {
             ),
 
             const SizedBox(height: 20),
-            const Text("Radar de Alarmas", style: TextStyle(fontSize: 25)),
+            const Text("Tu radar de estrenos", style: TextStyle(fontSize: 25)),
             const SizedBox(height: 20),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.9,
-              child: FutureBuilder<Movie?>(
-                future: MovieRepository.instance.getMovieById(4),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) return const SizedBox.shrink();
-                  return _CardAlarma(movie: snapshot.data!);
-                },
-              ),
+              child: _RadarAlarmas(moviesFuture: _moviesFuture),
             ),
-
-            const SizedBox(height: 10),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: FutureBuilder<Movie?>(
-                future: MovieRepository.instance.getMovieById(5),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) return const SizedBox.shrink();
-                  return _CardAlarma(movie: snapshot.data!);
-                },
-              ),
-            ),
-
-            const SizedBox(height: 10),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.9,
-              child: FutureBuilder<Movie?>(
-                future: MovieRepository.instance.getMovieById(3),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) return const SizedBox.shrink();
-                  return _CardProxima(movie: snapshot.data!);
-                },
-              ),
-            ),
-
-            const SizedBox(height: 10),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.9,
-                child: FutureBuilder<Movie?>(
-                future: MovieRepository.instance.getMovieById(2),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) return const SizedBox.shrink();
-                  return _CardProxima(movie: snapshot.data!);
-                },
-              ),
-            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
-bottomNavigationBar: BottomNavigationBar(
-  backgroundColor: kMorado,
-  selectedItemColor: Colors.white,
-  unselectedItemColor: Colors.white70,
-  currentIndex: 0, 
-  onTap: (index) {
-    if (index == 1) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => const AlarmPage()),
-      );
-    }
-  },
-  items: const <BottomNavigationBarItem>[
-    BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Catálogo'),
-    BottomNavigationBarItem(icon: Icon(Icons.alarm), label: 'Mis Alarmas'),
-  ],
-),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: kMorado,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white70,
+        currentIndex: 0,
+        onTap: (index) {
+          if (index == 1) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const AlarmPage()),
+            );
+          }
+        },
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Catálogo'),
+          BottomNavigationBarItem(icon: Icon(Icons.alarm), label: 'Mis Alarmas'),
+        ],
+      ),
     );
   }
 }

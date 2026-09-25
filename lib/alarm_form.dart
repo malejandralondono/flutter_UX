@@ -264,7 +264,7 @@ class _Encabezado extends StatelessWidget {
                       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: 8),
-                    Text('Estreno en ${movie.releaseDays} días'),
+                    Text('Estreno: ${movie.fechaEstrenoCorta}'),
                   ],
                 ),
               ),
