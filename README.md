@@ -5,6 +5,7 @@
 
 ## Estructura
 
+```
 flutter_UX/
 ├── lib/              ← app móvil 
 ├── assets/           ← pósters, actores y movies.json
@@ -13,7 +14,7 @@ flutter_UX/
     └── cine_alarm_web/
         ├── public/   ← pósters 
         └── src/app/  ← app web 
-
+```
 ## App web
 
 Requisito: Node.js. y Angular CLI
