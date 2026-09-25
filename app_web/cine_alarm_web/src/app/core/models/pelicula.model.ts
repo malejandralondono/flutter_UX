@@ -8,4 +8,4 @@ export interface Pelicula {
   posterUrl?: string;
 }
 
-export type PeliculaFormulario = Pick<Pelicula, 'titulo' | 'fechaEstreno' | 'sinopsis' | 'trailerUrl'>;
+export type PeliculaFormulario = Pick<Pelicula, 'titulo' | 'fechaEstreno' | 'sinopsis' | 'trailerUrl' | 'posterUrl'>;

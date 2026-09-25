@@ -27,15 +27,53 @@
   </app-seccion-formulario>
 
   <app-seccion-formulario titulo="Recursos">
-    <div class="campo campo-medio">
-      <label for="trailerUrl">Tráiler</label>
-      <div class="con-icono">
-        <span class="icono" aria-hidden="true">🔗</span>
-        <input id="trailerUrl" type="url" formControlName="trailerUrl" placeholder="URL del tráiler" />
+    <div class="recursos">
+      <div class="campo">
+        <span class="etiqueta">Póster</span>
+        <div class="poster-campo">
+          <div class="poster-preview">
+            @if (poster.value) {
+              <img [src]="poster.value" alt="Vista previa del póster" />
+            } @else {
+              <span>Sin imagen</span>
+            }
+          </div>
+
+          <div class="poster-acciones">
+            <input
+              id="posterArchivo"
+              type="file"
+              accept="image/*"
+              class="oculto"
+              (change)="alSeleccionarPoster($event)"
+            />
+            <label class="boton-archivo" for="posterArchivo">
+              {{ poster.value ? 'Cambiar imagen' : 'Elegir imagen' }}
+            </label>
+
+            @if (poster.value) {
+              <button type="button" class="quitar" (click)="quitarPoster()">Quitar imagen</button>
+            }
+
+            <span class="ayuda">JPG, PNG o WebP · máx. 2 MB</span>
+
+            @if (errorPoster()) {
+              <span class="error">{{ errorPoster() }}</span>
+            }
+          </div>
+        </div>
       </div>
-      @if (trailerUrl.invalid && trailerUrl.touched) {
-        <span class="error">Ingresa una URL válida (debe empezar con http:// o https://).</span>
-      }
+
+      <div class="campo">
+        <label for="trailerUrl">Tráiler</label>
+        <div class="con-icono">
+          <span class="icono" aria-hidden="true">🔗</span>
+          <input id="trailerUrl" type="url" formControlName="trailerUrl" placeholder="URL del tráiler" />
+        </div>
+        @if (trailerUrl.invalid && trailerUrl.touched) {
+          <span class="error">Ingresa una URL válida (debe empezar con http:// o https://).</span>
+        }
+      </div>
     </div>
   </app-seccion-formulario>
 
