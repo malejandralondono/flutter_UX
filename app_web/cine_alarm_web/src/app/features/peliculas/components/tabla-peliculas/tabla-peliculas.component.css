@@ -27,11 +27,12 @@ td {
 }
 
 .poster {
-  width: 18px;
-  height: 18px;
-  border-radius: 2px;
+  width: 36px;
+  height: 52px;
+  border-radius: 4px;
   background: linear-gradient(135deg, #eee, #d9d9d9);
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 .fecha { text-transform: capitalize; }

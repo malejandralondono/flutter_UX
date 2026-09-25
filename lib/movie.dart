@@ -1,6 +1,6 @@
 // lib/movie.dart
 import 'package:flutter/material.dart';
-
+import 'alarm_form.dart';
 import 'movie_repository.dart';
 import 'movie_model.dart';
 import 'alarm.dart';
@@ -112,7 +112,10 @@ class _MovieDetail extends StatelessWidget {
         textStyle: const TextStyle(fontSize: 16),
       ),
       onPressed: () {
-        /* TODO: añadir alarma */
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => AlarmFormPage(movieId: movie.id)),
+        );
       },
       icon: const Icon(Icons.alarm_add),
       label: const Text('Añadir alarma'),
